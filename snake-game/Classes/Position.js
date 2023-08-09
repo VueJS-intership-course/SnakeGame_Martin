@@ -1,4 +1,4 @@
-class Position {
+export class Position {
   x;
   y;
 

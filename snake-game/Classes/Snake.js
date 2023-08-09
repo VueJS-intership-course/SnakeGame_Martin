@@ -1,4 +1,6 @@
-class Snake {
+import { Position } from "./Position";
+
+export class Snake {
   constructor() {
     let position1 = new Position(1, 1);
     let position2 = new Position(1, 2);

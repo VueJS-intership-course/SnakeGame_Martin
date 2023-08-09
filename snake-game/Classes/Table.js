@@ -1,4 +1,4 @@
-class Table {
+export class Table {
   tableNode;
 
   constructor(rows, columns) {

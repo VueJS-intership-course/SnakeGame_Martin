@@ -1,4 +1,5 @@
 import './style.css';
+import { GameBoard } from './Classes/GameBoard';
 
 let gameBoard = new GameBoard(20, 20);
 let div = document.getElementById('table');
@@ -22,3 +23,5 @@ document.addEventListener('keydown', function (event) {
     direction = 'down';
   }
 });
+
+export {direction}

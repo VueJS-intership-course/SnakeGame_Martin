@@ -1,7 +1,11 @@
-class GameBoard {
+import { Table } from './Table';
+import { Snake } from './Snake';
+import { direction } from '../main';
+
+export class GameBoard {
   table;
   snake;
-//   fruitPosition;
+  // fruitPosition;
   // gameOver;
 
   constructor(height, width) {

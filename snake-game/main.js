@@ -25,12 +25,17 @@ class Table {
       this.tableNode.rows[x].cells[y].style.background = color;
     }
   }
+
+  makeDefault() {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
+        this.tableNode.rows[i].cells[j].style.background = '#7cf2bd';
+      }
+    }
+  }
 }
 
 class Snake {
-  partsOfBody;
-  currentDirection;
-
   constructor() {
     let position1 = new Position(1, 1);
     let position2 = new Position(1, 2);
@@ -48,7 +53,7 @@ class Snake {
     if (
       (this.currentDirection === 'right' && direction !== 'left') ||
       (this.currentDirection === 'left' && direction !== 'right') ||
-      (this.currentDirection ==='up' && direction !== 'down') ||
+      (this.currentDirection === 'up' && direction !== 'down') ||
       (this.currentDirection === 'down' && direction !== 'up')
     ) {
       this.currentDirection = direction;
@@ -63,8 +68,12 @@ class Snake {
     } else if (this.currentDirection === 'down') {
       newHead = new Position(head.x + 1, head.y);
     }
-
+    this.partsOfBody.shift();
     this.partsOfBody.push(newHead);
+  }
+
+  head() {
+    return this.bodyParts[this.bodyParts.length - 1];
   }
 }
 
@@ -81,7 +90,7 @@ class Position {
 class GameBoard {
   table;
   snake;
-  // fruitPosition;
+  fruitPosition;
   // gameOver;
 
   constructor(height, width) {
@@ -89,7 +98,18 @@ class GameBoard {
     this.snake = new Snake();
   }
 
+  setRandomFruit() {
+    while (true) {
+      let x = randomInt(0, this.table.rows - 1);
+      let y = randomInt(0, this.table.columns - 1);
+      this.fruitPosition = new Position(x, y);
+      return;
+    }
+  }
+
   gameLoop() {
+    this.table.makeDefault();
+
     // initialization the snake
     for (let i = 0; i < this.snake.partsOfBody.length; i++) {
       this.table.changeSnakeColor(
@@ -102,15 +122,19 @@ class GameBoard {
   }
 }
 
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 let gameBoard = new GameBoard(20, 20);
 let div = document.getElementById('table');
 gameBoard.table.initTableNode();
 div.append(gameBoard.table.tableNode);
-gameBoard.gameLoop();
+// gameBoard.gameLoop();
 
-// window.setInterval(function () {
-//   gameBoard.gameLoop();
-// }, 250);
+window.setInterval(function () {
+  gameBoard.gameLoop();
+}, 250);
 
 let direction = 'right';
 document.addEventListener('keydown', function (event) {

@@ -71,10 +71,6 @@ class Snake {
     this.partsOfBody.shift();
     this.partsOfBody.push(newHead);
   }
-
-  head() {
-    return this.bodyParts[this.bodyParts.length - 1];
-  }
 }
 
 class Position {

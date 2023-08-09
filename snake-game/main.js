@@ -7,7 +7,7 @@ gameBoard.table.initTableNode();
 div.append(gameBoard.table.tableNode);
 // gameBoard.gameLoop();
 
-//! TODO -> requestAnimation 
+//! TODO -> requestAnimation
 window.setInterval(function () {
   gameBoard.gameLoop();
 }, 250);
@@ -22,8 +22,15 @@ document.addEventListener('keydown', function (event) {
     direction = 'right';
   } else if (event.key == 'ArrowDown') {
     direction = 'down';
+  } else if (event.key == 'a') {
+    direction = 'left';
+  } else if (event.key == 'w') {
+    direction = 'up';
+  } else if (event.key == 'd') {
+    direction = 'right';
+  } else if (event.key == 's') {
+    direction = 'down';
   }
-  //asdw
 });
 
-export {direction}
+export { direction };

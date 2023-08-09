@@ -7,6 +7,7 @@ gameBoard.table.initTableNode();
 div.append(gameBoard.table.tableNode);
 // gameBoard.gameLoop();
 
+//! TODO -> requestAnimation 
 window.setInterval(function () {
   gameBoard.gameLoop();
 }, 250);
@@ -22,6 +23,7 @@ document.addEventListener('keydown', function (event) {
   } else if (event.key == 'ArrowDown') {
     direction = 'down';
   }
+  //asdw
 });
 
 export {direction}

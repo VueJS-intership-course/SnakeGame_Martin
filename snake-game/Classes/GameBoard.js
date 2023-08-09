@@ -12,7 +12,7 @@ export class GameBoard {
     this.table = new Table(height, width);
     this.snake = new Snake();
   }
-
+  
   gameLoop() {
     this.table.makeDefault();
 

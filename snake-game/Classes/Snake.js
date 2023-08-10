@@ -9,6 +9,7 @@ export class Snake {
     let position5 = new Position(1, 5);
     this.partsOfBody = [position1, position2, position3, position4, position5];
     this.currentDirection = 'right';
+    this.grow = false;
   }
 
   moveForward(direction) {
@@ -33,7 +34,13 @@ export class Snake {
     } else if (this.currentDirection === 'down') {
       newHead = new Position(head.x + 1, head.y);
     }
-    this.partsOfBody.shift();
+
+    if (this.grow) {
+      this.grow = false;
+    } else {
+      this.partsOfBody.shift();
+    }
+
     this.partsOfBody.push(newHead);
   }
 

@@ -38,6 +38,7 @@ export class GameBoard {
       this.snake.snakeHead().x == this.fruitPosition.x &&
       this.snake.snakeHead().y == this.fruitPosition.y
     ) {
+      this.snake.grow = true;
       this.setFruit();
     }
   }

@@ -1,13 +1,11 @@
-import { Position } from "./Position";
+import { Position } from './Position';
 
 export class Snake {
-  constructor() {
-    let position1 = new Position(1, 1);
-    let position2 = new Position(1, 2);
-    let position3 = new Position(1, 3);
-    let position4 = new Position(1, 4);
-    let position5 = new Position(1, 5);
-    this.partsOfBody = [position1, position2, position3, position4, position5];
+  constructor(segments) {
+    this.partsOfBody = [];
+    for (let index = 1; index <= segments; index++) {
+      this.partsOfBody.push(new Position(1, index));
+    }
     this.currentDirection = 'right';
     this.grow = false;
   }

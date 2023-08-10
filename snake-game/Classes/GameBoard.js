@@ -16,30 +16,68 @@ export class GameBoard {
   }
 
   setFruit() {
-    while (true) {
+    // while (true) {
+    //   let x = randomInteger(0, this.table.rows - 1);
+    //   let y = randomInteger(0, this.table.columns - 1);
+    //   this.fruitPosition = new Position(x, y);
+
+    //   for (let index = 0; index < this.snake.partsOfBody.length; index++) {
+    //     if (
+    //       this.snake.partsOfBody[index].x === x &&
+    //       this.snake.partsOfBody[index].y === y
+    //     ) {
+    //       continue;
+    //     }
+    //   }
+    //   return;
+    // }
+
+    do {
       let x = randomInteger(0, this.table.rows - 1);
       let y = randomInteger(0, this.table.columns - 1);
       this.fruitPosition = new Position(x, y);
 
+      let isFruitCollisionWithSnake = false;
       for (let index = 0; index < this.snake.partsOfBody.length; index++) {
         if (
           this.snake.partsOfBody[index].x === x &&
           this.snake.partsOfBody[index].y === y
         ) {
-          continue;
+          isFruitCollisionWithSnake = true;
+          break;
         }
       }
-      return;
-    }
+
+      if (!isFruitCollisionWithSnake) {
+        break;
+      }
+    } while (true);
   }
 
   handleEatingFruit() {
+    const snakeHead = this.snake.snakeHead();
+    let wrappedX;
+    if (snakeHead.x < 0) {
+      wrappedX = this.table.rows + snakeHead.x;
+    } else {
+      wrappedX = snakeHead.x % this.table.rows;
+    }
+
+    let wrappedY;
+    if (snakeHead.y < 0) {
+      wrappedY = this.table.columns + snakeHead.y;
+    } else {
+      wrappedY = snakeHead.y % this.table.columns;
+    }
+
     if (
-      this.snake.snakeHead().x == this.fruitPosition.x &&
-      this.snake.snakeHead().y == this.fruitPosition.y
+      (wrappedX === this.fruitPosition.x &&
+        wrappedY === this.fruitPosition.y) ||
+      (snakeHead.x === this.fruitPosition.x &&
+        snakeHead.y === this.fruitPosition.y)
     ) {
-      this.snake.grow = true;
       this.setFruit();
+      this.snake.grow = true;
     }
   }
 
@@ -50,12 +88,12 @@ export class GameBoard {
     //mirror move
     let head = this.snake.snakeHead();
     if (head.x < 0) {
-      head.x = this.table.rows - 1;
+      head.x = this.table.rows;
     } else if (head.x >= this.table.rows) {
       head.x = 0;
     }
     if (head.y < 0) {
-      head.y = this.table.columns - 1;
+      head.y = this.table.columns;
     } else if (head.y >= this.table.columns) {
       head.y = 0;
     }

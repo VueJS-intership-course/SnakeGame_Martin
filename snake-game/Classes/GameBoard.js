@@ -16,21 +16,42 @@ export class GameBoard {
   }
 
   setFruit() {
-    while (true) {
+    // while (true) {
+    //   let x = randomInteger(0, this.table.rows - 1);
+    //   let y = randomInteger(0, this.table.columns - 1);
+    //   this.fruitPosition = new Position(x, y);
+
+    //   for (let index = 0; index < this.snake.partsOfBody.length; index++) {
+    //     if (
+    //       this.snake.partsOfBody[index].x === x &&
+    //       this.snake.partsOfBody[index].y === y
+    //     ) {
+    //       continue;
+    //     }
+    //   }
+    //   return;
+    // }
+
+    do {
       let x = randomInteger(0, this.table.rows - 1);
       let y = randomInteger(0, this.table.columns - 1);
       this.fruitPosition = new Position(x, y);
-
+    
+      let isFruitCollisionWithSnake = false;
       for (let index = 0; index < this.snake.partsOfBody.length; index++) {
         if (
           this.snake.partsOfBody[index].x === x &&
           this.snake.partsOfBody[index].y === y
         ) {
-          continue;
+          isFruitCollisionWithSnake = true;
+          break;
         }
       }
-      return;
-    }
+    
+      if (!isFruitCollisionWithSnake) {
+        break;
+      }
+    } while (true);
   }
 
   handleEatingFruit() {
@@ -50,12 +71,12 @@ export class GameBoard {
     //mirror move
     let head = this.snake.snakeHead();
     if (head.x < 0) {
-      head.x = this.table.rows - 1;
+      head.x = this.table.rows;
     } else if (head.x >= this.table.rows) {
       head.x = 0;
     }
     if (head.y < 0) {
-      head.y = this.table.columns - 1;
+      head.y = this.table.columns;
     } else if (head.y >= this.table.columns) {
       head.y = 0;
     }

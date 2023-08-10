@@ -36,4 +36,8 @@ export class Snake {
     this.partsOfBody.shift();
     this.partsOfBody.push(newHead);
   }
+
+  snakeHead() {
+    return this.partsOfBody[this.partsOfBody.length - 1];
+  }
 }

@@ -1,21 +1,67 @@
 import { Table } from './Table';
 import { Snake } from './Snake';
-import { direction } from '../main';
+import { randomInteger } from '../utils';
+import { Position } from './Position';
 
 export class GameBoard {
   table;
   snake;
-  // fruitPosition;
+  fruitPosition;
   // gameOver;
 
   constructor(height, width) {
     this.table = new Table(height, width);
     this.snake = new Snake();
+    this.setFruit();
   }
-  
-  gameLoop() {
+
+  setFruit() {
+    while (true) {
+      let x = randomInteger(0, this.table.rows - 1);
+      let y = randomInteger(0, this.table.columns - 1);
+      this.fruitPosition = new Position(x, y);
+
+      for (let index = 0; index < this.snake.partsOfBody.length; index++) {
+        if (
+          this.snake.partsOfBody[index].x === x &&
+          this.snake.partsOfBody[index].y === y
+        ) {
+          continue;
+        }
+      }
+      return;
+    }
+  }
+
+  handleEatingFruit() {
+    if (
+      this.snake.snakeHead().x == this.fruitPosition.x &&
+      this.snake.snakeHead().y == this.fruitPosition.y
+    ) {
+      this.setFruit();
+    }
+  }
+
+  gameLoop(direction) {
+    this.snake.moveForward(direction);
+    this.handleEatingFruit();
+
+    //mirror move
+    let head = this.snake.snakeHead();
+    if (head.x < 0) {
+      head.x = this.table.rows - 1;
+    } else if (head.x >= this.table.rows) {
+      head.x = 0;
+    }
+    if (head.y < 0) {
+      head.y = this.table.columns - 1;
+    } else if (head.y >= this.table.columns) {
+      head.y = 0;
+    }
+
     this.table.makeDefault();
 
+    this.table.changeColor(this.fruitPosition.x, this.fruitPosition.y, 'red');
     // initialization the snake
     for (let i = 0; i < this.snake.partsOfBody.length; i++) {
       this.table.changeSnakeColor(
@@ -24,6 +70,5 @@ export class GameBoard {
         'green'
       );
     }
-    this.snake.moveForward(direction);
   }
 }

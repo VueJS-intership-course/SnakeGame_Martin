@@ -1,5 +1,6 @@
 import './style.css';
 import { GameBoard } from './Classes/GameBoard';
+import { direction } from './utils';
 
 let gameBoard = new GameBoard(20, 20);
 let div = document.getElementById('table');
@@ -9,28 +10,5 @@ div.append(gameBoard.table.tableNode);
 
 //! TODO -> requestAnimation
 window.setInterval(function () {
-  gameBoard.gameLoop();
+  gameBoard.gameLoop(direction);
 }, 250);
-
-let direction = 'right';
-document.addEventListener('keydown', function (event) {
-  if (event.key == 'ArrowLeft') {
-    direction = 'left';
-  } else if (event.key == 'ArrowUp') {
-    direction = 'up';
-  } else if (event.key == 'ArrowRight') {
-    direction = 'right';
-  } else if (event.key == 'ArrowDown') {
-    direction = 'down';
-  } else if (event.key == 'a') {
-    direction = 'left';
-  } else if (event.key == 'w') {
-    direction = 'up';
-  } else if (event.key == 'd') {
-    direction = 'right';
-  } else if (event.key == 's') {
-    direction = 'down';
-  }
-});
-
-export { direction };

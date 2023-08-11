@@ -14,6 +14,7 @@ export class GameBoard {
     this.snake = new Snake(5);
     this.fruit = new Cherry(this.table, this.snake);
     this.gameOver = false;
+    this.score = 0;
   }
 
   handleEatingFruit() {
@@ -30,9 +31,13 @@ export class GameBoard {
       (snakeHead.x === fruitPosition.x && snakeHead.y === fruitPosition.y)
     ) {
       this.snake.grow = true;
+      this.score += this.fruit.score;
       const randomFruit = Math.random() < 0.8 ? Cherry : Banana;
       this.fruit = new randomFruit(this.table, this.snake);
       this.fruit.updatePosition();
+
+      const scoreBoard = document.getElementById('score');
+      scoreBoard.textContent = this.score;
     }
   }
 
@@ -64,6 +69,9 @@ export class GameBoard {
       }
       if (partsOfBody > 1) {
         this.gameOver = true;
+        this.score = 0;
+        const scoreBoard = document.getElementById('score');
+        scoreBoard.textContent = this.score;
         break;
       }
     }

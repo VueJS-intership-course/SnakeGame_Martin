@@ -1,17 +1,16 @@
-import './style.css';
+import './styles/style.css'
 import { GameBoard } from './Classes/GameBoard';
-import { direction } from './utils';
+import { direction } from './utils/utils';
 
 let gameBoard = new GameBoard(20, 20);
 let div = document.getElementById('table');
 gameBoard.table.initTableNode();
 div.append(gameBoard.table.tableNode);
-// gameBoard.gameLoop();
 
 //! TODO -> requestAnimation
 window.setInterval(function () {
   let setDirection = direction;
-  
+
   gameBoard.gameLoop(setDirection);
 
   if (gameBoard.gameOver) {

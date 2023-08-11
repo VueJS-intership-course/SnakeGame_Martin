@@ -1,4 +1,4 @@
-import { randomInteger } from "../utils";
+import { randomInteger } from "../utils/utils";
 import { Position } from "./Position";
 
 export class Fruit {

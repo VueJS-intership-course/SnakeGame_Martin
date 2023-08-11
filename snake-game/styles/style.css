@@ -1,0 +1,31 @@
+div {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border: 1px solid;
+  margin: 25px;
+}
+
+td {
+  width: 25px;
+  height: 25px;
+}
+
+tr {
+  background: #7cf2bd;
+}
+
+.score-board {
+  font-size: 30px;
+  margin: 30px;
+  text-align: center;
+  color: black;
+}
+
+#score {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff5722;
+}

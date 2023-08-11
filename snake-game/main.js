@@ -20,6 +20,5 @@ window.setInterval(function () {
     gameBoard = new GameBoard(20, 20);
     gameBoard.table.initTableNode();
     div.append(gameBoard.table.tableNode);
-    setDirection = 'right';
   }
 }, 250);

@@ -1,17 +1,21 @@
 import { Table } from './Table';
 import { Snake } from './Snake';
-import { randomInteger } from '../utils';
-import { Position } from './Position';
+import { Fruit } from './Fruit';
 
 export class GameBoard {
   table;
   snake;
+<<<<<<< HEAD
   fruitPosition;
+=======
+  fruit;
+>>>>>>> setFruit
   gameOver;
 
   constructor(height, width) {
     this.table = new Table(height, width);
     this.snake = new Snake(5);
+<<<<<<< HEAD
     this.setFruit();
   }
 
@@ -37,31 +41,26 @@ export class GameBoard {
         break;
       }
     } while (true);
+=======
+    this.fruit = new Fruit(this.table, this.snake);
+    this.gameOver = false;
+>>>>>>> setFruit
   }
 
   handleEatingFruit() {
     const snakeHead = this.snake.snakeHead();
-    let wrappedX;
-    if (snakeHead.x < 0) {
-      wrappedX = this.table.rows + snakeHead.x;
-    } else {
-      wrappedX = snakeHead.x % this.table.rows;
-    }
+    const fruitPosition = this.fruit.position;
 
-    let wrappedY;
-    if (snakeHead.y < 0) {
-      wrappedY = this.table.columns + snakeHead.y;
-    } else {
-      wrappedY = snakeHead.y % this.table.columns;
-    }
+    const wrappedSnakeHeadX = (snakeHead.x + this.table.rows) % this.table.rows;
+    const wrappedSnakeHeadY =
+      (snakeHead.y + this.table.columns) % this.table.columns;
 
     if (
-      (wrappedX === this.fruitPosition.x &&
-        wrappedY === this.fruitPosition.y) ||
-      (snakeHead.x === this.fruitPosition.x &&
-        snakeHead.y === this.fruitPosition.y)
+      (wrappedSnakeHeadX === fruitPosition.x &&
+        wrappedSnakeHeadY === fruitPosition.y) ||
+      (snakeHead.x === fruitPosition.x && snakeHead.y === fruitPosition.y)
     ) {
-      this.setFruit();
+      this.fruit.updatePosition();
       this.snake.grow = true;
     }
   }
@@ -100,7 +99,7 @@ export class GameBoard {
 
     this.table.makeDefault();
 
-    this.table.changeColor(this.fruitPosition.x, this.fruitPosition.y, 'red');
+    this.table.changeColor(this.fruit.position.x, this.fruit.position.y, 'red');
     // initialization the snake
     for (let i = 0; i < this.snake.partsOfBody.length; i++) {
       this.table.changeSnakeColor(

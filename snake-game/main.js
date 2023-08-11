@@ -22,4 +22,8 @@ window.setInterval(function () {
     div.append(gameBoard.table.tableNode);
     setDirection = 'right';
   }
+<<<<<<< HEAD
 }, 250);
+=======
+}, 250);
+>>>>>>> setFruit

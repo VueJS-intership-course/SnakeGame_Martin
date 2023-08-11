@@ -1,6 +1,7 @@
 import { Table } from './Table';
 import { Snake } from './Snake';
-import { Fruit } from './Fruit';
+import { Cherry } from './Cherry';
+import { Banana } from './Banana';
 
 export class GameBoard {
   table;
@@ -11,7 +12,7 @@ export class GameBoard {
   constructor(height, width) {
     this.table = new Table(height, width);
     this.snake = new Snake(5);
-    this.fruit = new Fruit(this.table, this.snake);
+    this.fruit = new Cherry(this.table, this.snake);
     this.gameOver = false;
   }
 
@@ -28,8 +29,10 @@ export class GameBoard {
         wrappedSnakeHeadY === fruitPosition.y) ||
       (snakeHead.x === fruitPosition.x && snakeHead.y === fruitPosition.y)
     ) {
-      this.fruit.updatePosition();
       this.snake.grow = true;
+      const randomFruit = Math.random() < 0.8 ? Cherry : Banana;
+      this.fruit = new randomFruit(this.table, this.snake);
+      this.fruit.updatePosition();
     }
   }
 
@@ -67,7 +70,11 @@ export class GameBoard {
 
     this.table.makeDefault();
 
-    this.table.changeColor(this.fruit.position.x, this.fruit.position.y, 'red');
+    this.table.changeFruitColor(
+      this.fruit.position.x,
+      this.fruit.position.y,
+      this.fruit.color
+    );
     // initialization the snake
     for (let i = 0; i < this.snake.partsOfBody.length; i++) {
       this.table.changeSnakeColor(

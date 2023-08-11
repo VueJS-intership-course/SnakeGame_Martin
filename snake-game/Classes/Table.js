@@ -18,19 +18,13 @@ export class Table {
     }
   }
 
-  changeColor(x, y, color) {
+  changeFruitColor(x, y, color) {
     if (x >= 0 && x < this.rows && y >= 0 && y < this.columns) {
       this.tableNode.rows[x].cells[y].style.background = color;
     }
   }
 
   changeSnakeColor(x, y, color) {
-    if (x >= 0 && x < this.rows && y >= 0 && y < this.columns) {
-      this.tableNode.rows[x].cells[y].style.background = color;
-    }
-  }
-
-  changeColor(x, y, color) {
     if (x >= 0 && x < this.rows && y >= 0 && y < this.columns) {
       this.tableNode.rows[x].cells[y].style.background = color;
     }

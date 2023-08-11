@@ -2,10 +2,12 @@ import { randomInteger } from "../utils";
 import { Position } from "./Position";
 
 export class Fruit {
-  constructor(table, snake) {
+  constructor(table, snake, color, score) {
     this.table = table;
     this.snake = snake;
     this.position;
+    this.color = color;
+    this.score = score;
     this.generateValidPosition();
   }
 

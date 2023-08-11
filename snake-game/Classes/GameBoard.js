@@ -5,46 +5,14 @@ import { Fruit } from './Fruit';
 export class GameBoard {
   table;
   snake;
-<<<<<<< HEAD
-  fruitPosition;
-=======
   fruit;
->>>>>>> setFruit
   gameOver;
 
   constructor(height, width) {
     this.table = new Table(height, width);
     this.snake = new Snake(5);
-<<<<<<< HEAD
-    this.setFruit();
-  }
-
-  setFruit() {
-    //! Without do while 
-    do {
-      let x = randomInteger(0, this.table.rows - 1);
-      let y = randomInteger(0, this.table.columns - 1);
-      this.fruitPosition = new Position(x, y);
-
-      let isFruitCollisionWithSnake = false;
-      for (let index = 0; index < this.snake.partsOfBody.length; index++) {
-        if (
-          this.snake.partsOfBody[index].x === x &&
-          this.snake.partsOfBody[index].y === y
-        ) {
-          isFruitCollisionWithSnake = true;
-          break;
-        }
-      }
-
-      if (!isFruitCollisionWithSnake) {
-        break;
-      }
-    } while (true);
-=======
     this.fruit = new Fruit(this.table, this.snake);
     this.gameOver = false;
->>>>>>> setFruit
   }
 
   handleEatingFruit() {

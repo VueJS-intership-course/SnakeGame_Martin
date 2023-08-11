@@ -10,5 +10,16 @@ div.append(gameBoard.table.tableNode);
 
 //! TODO -> requestAnimation
 window.setInterval(function () {
-  gameBoard.gameLoop(direction);
+  let setDirection = direction;
+  
+  gameBoard.gameLoop(setDirection);
+
+  if (gameBoard.gameOver) {
+    alert('Game Over!');
+    div.removeChild(gameBoard.table.tableNode);
+    gameBoard = new GameBoard(20, 20);
+    gameBoard.table.initTableNode();
+    div.append(gameBoard.table.tableNode);
+    setDirection = 'right';
+  }
 }, 250);

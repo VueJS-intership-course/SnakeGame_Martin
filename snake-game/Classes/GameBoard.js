@@ -7,7 +7,7 @@ export class GameBoard {
   table;
   snake;
   fruitPosition;
-  // gameOver;
+  gameOver;
 
   constructor(height, width) {
     this.table = new Table(height, width);
@@ -16,6 +16,7 @@ export class GameBoard {
   }
 
   setFruit() {
+    //! Without do while 
     do {
       let x = randomInteger(0, this.table.rows - 1);
       let y = randomInteger(0, this.table.columns - 1);
@@ -80,6 +81,21 @@ export class GameBoard {
       head.y = this.table.columns;
     } else if (head.y >= this.table.columns) {
       head.y = 0;
+    }
+
+    // check snake collision
+    let partsOfBody = 0;
+    for (let i = 0; i < this.snake.partsOfBody.length; i++) {
+      if (
+        head.x == this.snake.partsOfBody[i].x &&
+        head.y == this.snake.partsOfBody[i].y
+      ) {
+        partsOfBody += 1;
+      }
+      if (partsOfBody > 1) {
+        this.gameOver = true;
+        break;
+      }
     }
 
     this.table.makeDefault();

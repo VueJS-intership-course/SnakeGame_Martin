@@ -35,7 +35,7 @@ function updateGameLoop(timestamp) {
       for (const item of readyStorage) {
         const player = item.player;
         const score = item.score;
-        const date = new Date(item.date).toString(); // Convert timestamp to a human-readable date
+        const date = new Date(item.date).toString();
 
         const formattedText = `Player: ${player}, Score: ${score}, Date: ${date}`;
         const li = document.createElement('li');

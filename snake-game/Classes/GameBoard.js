@@ -15,9 +15,11 @@ export class GameBoard {
     this.fruit = new Cherry(this.table, this.snake);
     this.gameOver = false;
     this.score = 0;
+    this.playerName = prompt('Enter your name: ');
   }
 
   handleEatingFruit() {
+    const storage = [];
     const snakeHead = this.snake.snakeHead();
     const fruitPosition = this.fruit.position;
 
@@ -39,6 +41,16 @@ export class GameBoard {
       const scoreBoard = document.getElementById('score');
       scoreBoard.textContent = this.score;
     }
+
+    const newPlayer = [
+      {
+        player: this.playerName,
+        score: this.score,
+        date: Date.now(),
+      },
+    ];
+    storage.push(JSON.stringify(newPlayer));
+    localStorage.setItem('storage', storage);
   }
 
   gameLoop(direction) {

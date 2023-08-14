@@ -11,7 +11,7 @@ export class GameBoard {
 
   constructor(height, width) {
     this.table = new Table(height, width);
-    this.snake = new Snake(5);
+    this.snake = new Snake(5, 1.5);
     this.fruit = new Cherry(this.table, this.snake);
     this.gameOver = false;
     this.score = 0;

@@ -1,13 +1,14 @@
 import { Position } from './Position';
 
 export class Snake {
-  constructor(segments) {
+  constructor(segments, initialSpeed) {
     this.partsOfBody = [];
     for (let index = 1; index <= segments; index++) {
       this.partsOfBody.push(new Position(1, index));
     }
     this.currentDirection = 'right';
     this.grow = false;
+    this.speed = initialSpeed;
   }
 
   moveForward(direction) {
@@ -35,6 +36,7 @@ export class Snake {
 
     if (this.grow) {
       this.grow = false;
+      this.increasingTheSpeed();
     } else {
       this.partsOfBody.shift();
     }
@@ -44,5 +46,9 @@ export class Snake {
 
   snakeHead() {
     return this.partsOfBody[this.partsOfBody.length - 1];
+  }
+
+  increasingTheSpeed() {
+    this.speed += 0.1;
   }
 }

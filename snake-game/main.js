@@ -8,17 +8,49 @@ gameBoard.table.initTableNode();
 div.append(gameBoard.table.tableNode);
 
 //! TODO -> requestAnimation
-window.setInterval(function () {
+// window.setInterval(function () {
+//   let setDirection = direction;
+
+//   gameBoard.gameLoop(setDirection);
+
+//   if (gameBoard.gameOver) {
+//     alert('Game Over!');
+//     div.removeChild(gameBoard.table.tableNode);
+//     gameBoard = new GameBoard(20, 20);
+//     gameBoard.table.initTableNode();
+//     div.append(gameBoard.table.tableNode);
+//     setDirection = 'right';
+//   }
+// }, 250);
+
+let oldTimestamp = 0;
+
+function updateGameLoop(timestamp) {
+  if (!oldTimestamp) {
+    oldTimestamp = timestamp;
+  }
   let setDirection = direction;
 
-  gameBoard.gameLoop(setDirection);
+  const time = timestamp - oldTimestamp;
 
-  if (gameBoard.gameOver) {
-    alert('Game Over!');
-    div.removeChild(gameBoard.table.tableNode);
-    gameBoard = new GameBoard(20, 20);
-    gameBoard.table.initTableNode();
-    div.append(gameBoard.table.tableNode);
-    setDirection = 'right';
+  const frameRate = 1000 / gameBoard.snake.speed;
+
+  if (time >= frameRate) {
+    gameBoard.gameLoop(setDirection);
+
+    if (gameBoard.gameOver) {
+      alert('Game Over!');
+      div.removeChild(gameBoard.table.tableNode);
+      gameBoard = new GameBoard(20, 20);
+      gameBoard.table.initTableNode();
+      div.append(gameBoard.table.tableNode);
+      setDirection = 'right';
+    }
+
+    oldTimestamp = timestamp;
   }
-}, 250);
+
+  requestAnimationFrame(updateGameLoop);
+}
+
+requestAnimationFrame(updateGameLoop);

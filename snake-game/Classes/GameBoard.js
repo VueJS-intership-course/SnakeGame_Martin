@@ -41,16 +41,6 @@ export class GameBoard {
       const scoreBoard = document.getElementById('score');
       scoreBoard.textContent = this.score;
     }
-
-    const newPlayer = [
-      {
-        player: this.playerName,
-        score: this.score,
-        date: Date.now(),
-      },
-    ];
-    storage.push(JSON.stringify(newPlayer));
-    localStorage.setItem('storage', storage);
   }
 
   gameLoop(direction) {
@@ -81,6 +71,18 @@ export class GameBoard {
       }
       if (partsOfBody > 1) {
         this.gameOver = true;
+        const newPlayer = {
+          player: this.playerName,
+          score: this.score,
+          date: Date.now(),
+        };
+
+        const readyStorage = JSON.parse(
+          localStorage.getItem('storage') || '[]'
+        );
+
+        readyStorage.push(newPlayer);
+        localStorage.setItem('storage', JSON.stringify(readyStorage));
         this.score = 0;
         const scoreBoard = document.getElementById('score');
         scoreBoard.textContent = this.score;

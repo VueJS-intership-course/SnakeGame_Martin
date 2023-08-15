@@ -1,4 +1,5 @@
 export class Player {
+    
   storage() {
     const scoreList = document.getElementById('score-list');
     const readyStorage = JSON.parse(localStorage.getItem('storage'));
@@ -6,7 +7,7 @@ export class Player {
       if (b.score === a.score) {
         return b.date - a.date;
       }
-      
+
       return b.score - a.score;
     });
 

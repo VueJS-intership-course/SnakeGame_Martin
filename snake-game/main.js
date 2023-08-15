@@ -60,7 +60,7 @@ function updateGameLoop(timestamp) {
 
     oldTimestamp = timestamp;
   }
-
+  
   requestAnimationFrame(updateGameLoop);
 }
 

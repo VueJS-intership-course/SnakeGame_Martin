@@ -6,6 +6,7 @@ export class Player {
       if (b.score === a.score) {
         return b.date - a.date;
       }
+      
       return b.score - a.score;
     });
 

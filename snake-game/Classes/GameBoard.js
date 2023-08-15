@@ -97,6 +97,7 @@ export class GameBoard {
       this.fruit.position.y,
       this.fruit.color
     );
+    
     // initialization the snake
     for (let i = 0; i < this.snake.partsOfBody.length; i++) {
       this.table.changeSnakeColor(
